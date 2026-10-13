@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Jarrón Bruma",
+    "category": "Hogar",
+    "price": 28.5,
+    "description": "Cerámica artesanal con acabado mate.",
+    "image": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=85",
+    "color": "sand",
+    "badge": "Favorito"
+  },
+  {
+    "id": 2,
+    "name": "Bolso Nómada",
+    "category": "Accesorios",
+    "price": 42,
+    "description": "Lona resistente para llevar lo esencial.",
+    "image": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=900&q=85",
+    "color": "sage",
+    "badge": ""
+  },
+  {
+    "id": 3,
+    "name": "Vela Atardecer",
+    "category": "Bienestar",
+    "price": 18.75,
+    "description": "Notas cálidas de cedro y naranja.",
+    "image": "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=85",
+    "color": "rose",
+    "badge": "Nuevo"
+  },
+  {
+    "id": 4,
+    "name": "Taza Calma",
+    "category": "Hogar",
+    "price": 16,
+    "description": "Tu ritual favorito merece una buena taza.",
+    "image": "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=900&q=85",
+    "color": "clay",
+    "badge": ""
+  },
+  {
+    "id": 5,
+    "name": "Cuaderno Botánico",
+    "category": "Papelería",
+    "price": 12.5,
+    "description": "Papel reciclado para tus ideas favoritas.",
+    "image": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=900&q=85",
+    "color": "sage",
+    "badge": ""
+  },
+  {
+    "id": 6,
+    "name": "Set de cuidado",
+    "category": "Bienestar",
+    "price": 35,
+    "description": "Un momento para ti, todos los días.",
+    "image": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85",
+    "color": "sand",
+    "badge": "Favorito"
+  },
+  {
+    "id": 7,
+    "name": "Gafas Sol",
+    "category": "Accesorios",
+    "price": 31.25,
+    "description": "Diseño ligero para los días luminosos.",
+    "image": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=85",
+    "color": "clay",
+    "badge": ""
+  },
+  {
+    "id": 8,
+    "name": "Lámina Serena",
+    "category": "Papelería",
+    "price": 22,
+    "description": "Un pequeño paisaje para tu espacio.",
+    "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=85",
+    "color": "rose",
+    "badge": "Edición limitada"
+  }
+]

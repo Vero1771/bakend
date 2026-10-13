@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f5f0" />
+    <meta name="description" content="Explora una selección de productos para tu día a día." />
+    <title><%= title %> | Catálogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script type="module" src="/scripts/main.js"></script>
+  </head>
+  <body id="top">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Luma Market, inicio">
+        <span class="brand-mark" aria-hidden="true">l</span>
+        <span>luma<span class="brand-light">market</span></span>
+      </a>
+      <nav class="header-links" aria-label="Navegación principal">
+        <a class="active" href="#catalogo">Tienda</a>
+        <a href="#nosotros">Nuestra esencia</a>
+      </nav>
+      <button class="cart-shortcut" type="button" data-scroll-cart aria-label="Ir al carrito">
+        <span class="cart-icon" aria-hidden="true">↗</span>
+        <span>Mi carrito</span>
+        <span class="header-cart-count" data-cart-count>0</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" id="nosotros">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> COSAS BONITAS, VIDA CONSCIENTE</p>
+          <h1>Pequeños detalles.<br /><span>Grandes momentos.</span></h1>
+          <p class="hero-description">Una colección pensada para acompañarte todos los días. Elige con calma, disfruta cada detalle.</p>
+          <a class="hero-link" href="#catalogo">Explorar colección <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
+          <div class="hero-sun"></div>
+          <div class="hero-vase">
+            <div class="vase-neck"></div>
+            <div class="vase-body"></div>
+          </div>
+          <div class="hero-stem stem-one"><i></i><i></i><i></i></div>
+          <div class="hero-stem stem-two"><i></i><i></i></div>
+          <span class="hero-art-label">objetos<br />para disfrutar</span>
+        </div>
+        <div class="hero-index"><span>01</span><span class="index-line"></span><span>03</span></div>
+      </section>
+
+      <section class="catalog-section" id="catalogo">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> SELECCIÓN DE TEMPORADA</p>
+            <h2>Encuentra tu favorito<span class="heading-period">.</span></h2>
+          </div>
+          <p class="results-count" data-results-count>Preparando la colección...</p>
+        </div>
+
+        <div class="catalog-toolbar">
+          <form class="search-form" data-search-form role="search">
+            <label class="visually-hidden" for="product-search">Buscar productos</label>
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="product-search" name="search" type="search" placeholder="¿Qué estás buscando?" autocomplete="off" data-search />
+            <button class="visually-hidden" type="submit">Buscar</button>
+          </form>
+          <div class="toolbar-filters">
+            <label class="select-wrap">
+              <span class="visually-hidden">Filtrar por categoría</span>
+              <select data-category aria-label="Filtrar por categoría">
+                <option value="all">Todas las categorías</option>
+              </select>
+              <span class="select-chevron" aria-hidden="true">⌄</span>
+            </label>
+            <label class="select-wrap sort-select">
+              <span class="visually-hidden">Ordenar productos</span>
+              <select data-sort aria-label="Ordenar productos">
+                <option value="featured">Ordenar: destacados</option>
+                <option value="price-asc">Precio: menor a mayor</option>
+                <option value="price-desc">Precio: mayor a menor</option>
+                <option value="name">Nombre: A-Z</option>
+              </select>
+              <span class="select-chevron" aria-hidden="true">⌄</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="status-message" data-status role="status" aria-live="polite" hidden></div>
+        <div class="product-grid" data-product-grid aria-live="polite"></div>
+      </section>
+
+      <section class="cart-section" id="carrito" data-cart-section>
+        <div class="cart-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> TU SELECCIÓN</p>
+            <h2>El carrito<span class="heading-period">.</span></h2>
+          </div>
+          <span class="cart-items-label" data-cart-items-label>0 productos</span>
+        </div>
+        <div class="cart-layout">
+          <div class="cart-items" data-cart-items></div>
+          <aside class="cart-summary">
+            <p class="summary-title">Resumen del pedido</p>
+            <div class="summary-row"><span>Subtotal</span><span data-cart-subtotal>$0</span></div>
+            <div class="summary-row"><span>Envío</span><span class="shipping-note">Calculado al finalizar</span></div>
+            <div class="summary-total"><span>Total estimado</span><span data-cart-total>$0</span></div>
+            <button class="checkout-button" type="button" data-checkout disabled>Continuar con mi pedido <span aria-hidden="true">→</span></button>
+            <p class="checkout-note checkout-status" data-checkout-status role="status" aria-live="polite" hidden></p>
+            <p class="checkout-note">Compra tranquila, disfruta el proceso.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">l</span><span>luma<span class="brand-light">market</span></span></a>
+      <p>Hecho para disfrutar lo cotidiano.</p>
+      <span>© 2026 Luma Market</span>
+    </footer>
+  </body>
+</html>
