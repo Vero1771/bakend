@@ -1,7 +1,7 @@
 LUMA MARKET - CATÁLOGO INTERACTIVO
 
 Repositorio: https://github.com/Vero1771/bakend
-Video de la demostración: [AGREGAR EL ENLACE DE YOUTUBE AL PUBLICARLO]
+Video de la demostración: https://youtu.be/SyOJ8updclQ?si=mPbfGsknvLC5qCw2
 
 DATOS ACADÉMICOS
 Estudiante: Verónica Juliana Andrade Peña
@@ -49,9 +49,3 @@ La actividad se presenta de forma individual. Utilicé herramientas de
 inteligencia artificial como apoyo durante la preparación y revisión del
 proyecto. Como estudiante, me corresponde revisar el código, probar la
 aplicación y explicar su funcionamiento en la sustentación.
-
-VIDEO
-Al subir la demostración a YouTube, agrega las etiquetas
-#univalledelmomboy y #tareaUVM y reemplaza arriba el texto pendiente por el
-enlace del video. En la grabación, presenta los datos académicos, muestra las
-funciones principales y explica los módulos del proyecto.
