@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../app');
+const createApp = require('../app');
 const debug = require('debug')('bakend:server');
 const http = require('http');
 
@@ -12,6 +12,7 @@ const http = require('http');
  * Get port from environment and store in Express.
  */
 
+const app = createApp();
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
