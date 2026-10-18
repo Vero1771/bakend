@@ -4,6 +4,10 @@ Aplicación web para consultar y administrar el inventario de Luma Market.
 Permite gestionar productos y categorías, y guarda los cambios en una base de
 datos SQLite local.
 
+## Video de demostración
+
+[Ver el video de la Actividad 2 en YouTube](https://youtu.be/OevVay7fHow)
+
 ## Tecnologías
 
 - React y Tailwind CSS para la interfaz.
