@@ -15,6 +15,12 @@ const categorySelect = `
   LEFT JOIN products p ON p.category_id = c.id
 `;
 
+const supplierSelect = `
+  SELECT s.id, s.name, s.contact, s.email, s.phone, s.address,
+    s.created_at AS createdAt
+  FROM suppliers s
+`;
+
 const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 
 const readProduct = (body) => {
@@ -60,6 +66,22 @@ const readCategory = (body) => {
   if (category.description.length > 240) errors.push('La descripción no puede superar 240 caracteres.');
 
   return { category, errors };
+};
+
+const readSupplier = (body) => {
+  const supplier = {
+    name: typeof body.name === 'string' ? body.name.trim() : '',
+    contact: typeof body.contact === 'string' ? body.contact.trim() : '',
+    email: typeof body.email === 'string' ? body.email.trim().toLowerCase() : '',
+    phone: typeof body.phone === 'string' ? body.phone.trim() : '',
+    address: typeof body.address === 'string' ? body.address.trim() : ''
+  };
+  const errors = [];
+  if (!supplier.name || supplier.name.length > 80) errors.push('El nombre es obligatorio y no puede superar 80 caracteres.');
+  if (supplier.contact.length > 80) errors.push('El contacto no puede superar 80 caracteres.');
+  if (supplier.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(supplier.email)) errors.push('El correo del proveedor no es válido.');
+  if (supplier.email.length > 120 || supplier.phone.length > 30 || supplier.address.length > 160) errors.push('Los datos del proveedor superan la longitud permitida.');
+  return { supplier, errors };
 };
 
 const handleDatabaseError = (res, error) => {
@@ -201,6 +223,45 @@ const createApiRouter = (db) => {
     } catch (error) {
       return handleDatabaseError(res, error);
     }
+  });
+
+  router.get('/suppliers', (req, res) => {
+    res.json(db.prepare(`${supplierSelect} ORDER BY s.name COLLATE NOCASE`).all());
+  });
+
+  router.post('/suppliers', (req, res) => {
+    const { supplier, errors } = readSupplier(req.body || {});
+    if (errors.length) return res.status(400).json({ error: errors[0], details: errors });
+    try {
+      const result = db.prepare(`INSERT INTO suppliers (name, contact, email, phone, address)
+        VALUES (@name, @contact, @email, @phone, @address)`).run(supplier);
+      return res.status(201).json(db.prepare(`${supplierSelect} WHERE s.id = ?`).get(result.lastInsertRowid));
+    } catch (error) {
+      return handleDatabaseError(res, error);
+    }
+  });
+
+  router.put('/suppliers/:id', (req, res) => {
+    const id = Number(req.params.id);
+    const { supplier, errors } = readSupplier(req.body || {});
+    if (!Number.isInteger(id) || id < 1) return res.status(400).json({ error: 'Identificador de proveedor inválido.' });
+    if (errors.length) return res.status(400).json({ error: errors[0], details: errors });
+    try {
+      const result = db.prepare(`UPDATE suppliers SET name=@name, contact=@contact,
+        email=@email, phone=@phone, address=@address WHERE id=@id`).run({ ...supplier, id });
+      if (result.changes === 0) return res.status(404).json({ error: 'No se encontró el proveedor.' });
+      return res.json(db.prepare(`${supplierSelect} WHERE s.id = ?`).get(id));
+    } catch (error) {
+      return handleDatabaseError(res, error);
+    }
+  });
+
+  router.delete('/suppliers/:id', (req, res) => {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id < 1) return res.status(400).json({ error: 'Identificador de proveedor inválido.' });
+    const result = db.prepare('DELETE FROM suppliers WHERE id = ?').run(id);
+    if (result.changes === 0) return res.status(404).json({ error: 'No se encontró el proveedor.' });
+    return res.status(204).end();
   });
 
   return router;

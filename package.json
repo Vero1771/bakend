@@ -16,6 +16,7 @@
     "test:watch": "node --test --watch"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.14.0",
     "better-sqlite3": "^13.0.3",
     "cookie-parser": "^1.4.7",
     "debug": "^4.4.1",
@@ -24,11 +25,12 @@
     "http-errors": "^2.0.0",
     "morgan": "^1.10.1",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-redux": "^9.3.1"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.4",
     "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^5.0.4",
     "concurrently": "^9.2.1",
     "lucide-react": "^0.468.0",
     "recharts": "^2.15.4",

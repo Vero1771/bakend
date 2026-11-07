@@ -37,6 +37,16 @@ const createDatabase = (databasePath = process.env.DATABASE_PATH || path.join(__
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
       updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS suppliers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL COLLATE NOCASE UNIQUE,
+      contact TEXT NOT NULL DEFAULT '',
+      email TEXT NOT NULL DEFAULT '',
+      phone TEXT NOT NULL DEFAULT '',
+      address TEXT NOT NULL DEFAULT '',
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 
   const categoryCount = db.prepare('SELECT COUNT(*) AS count FROM categories').get().count;
@@ -69,6 +79,18 @@ const createDatabase = (databasePath = process.env.DATABASE_PATH || path.join(__
       });
     });
 
+    seed();
+  }
+
+  const supplierCount = db.prepare('SELECT COUNT(*) AS count FROM suppliers').get().count;
+  if (supplierCount === 0) {
+    const insertSupplier = db.prepare('INSERT INTO suppliers (name, contact, email, phone, address) VALUES (?, ?, ?, ?, ?)');
+    const seedSuppliers = [
+      ['Casa Norte', 'María González', 'compras@casanorte.example', '+58 412-555-0182', 'Valera, Trujillo'],
+      ['Taller Raíces', 'Luis Andrade', 'hola@tallarraices.example', '+58 414-555-0137', 'Mérida, Venezuela'],
+      ['Detalles del Valle', 'Ana Peña', 'pedidos@detallesvalle.example', '+58 416-555-0104', 'Caracas, Venezuela']
+    ];
+    const seed = db.transaction(() => seedSuppliers.forEach((supplier) => insertSupplier.run(...supplier)));
     seed();
   }
 

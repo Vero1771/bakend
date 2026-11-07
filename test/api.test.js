@@ -109,3 +109,27 @@ test('API returns JSON errors for missing routes and malformed requests', async 
   assert.equal(malformed.status, 400);
   assert.equal(typeof (await malformed.json()).error, 'string');
 });
+
+test('supplier endpoint supports the complete CRUD lifecycle', async () => {
+  const payload = {
+    name: 'Proveedor de pruebas',
+    contact: 'Persona de prueba',
+    email: 'pruebas@example.com',
+    phone: '+58 400-000-0000',
+    address: 'Valera'
+  };
+  const createdResponse = await jsonRequest('/api/suppliers', 'POST', payload);
+  const created = await createdResponse.json();
+  assert.equal(createdResponse.status, 201);
+  assert.equal(created.email, payload.email);
+
+  const duplicateResponse = await jsonRequest('/api/suppliers', 'POST', payload);
+  assert.equal(duplicateResponse.status, 409);
+
+  const updatedResponse = await jsonRequest(`/api/suppliers/${created.id}`, 'PUT', { ...payload, name: 'Proveedor actualizado' });
+  assert.equal(updatedResponse.status, 200);
+  assert.equal((await updatedResponse.json()).name, 'Proveedor actualizado');
+
+  const deletedResponse = await jsonRequest(`/api/suppliers/${created.id}`, 'DELETE');
+  assert.equal(deletedResponse.status, 204);
+});

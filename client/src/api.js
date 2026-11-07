@@ -28,5 +28,9 @@ export const api = {
   deleteProduct: (id) => request(`/api/products/${id}`, { method: 'DELETE' }),
   createCategory: (category) => request('/api/categories', sendJson('POST', category)),
   updateCategory: (id, category) => request(`/api/categories/${id}`, sendJson('PUT', category)),
-  deleteCategory: (id) => request(`/api/categories/${id}`, { method: 'DELETE' })
+  deleteCategory: (id) => request(`/api/categories/${id}`, { method: 'DELETE' }),
+  suppliers: () => request('/api/suppliers'),
+  createSupplier: (supplier) => request('/api/suppliers', sendJson('POST', supplier)),
+  updateSupplier: (id, supplier) => request(`/api/suppliers/${id}`, sendJson('PUT', supplier)),
+  deleteSupplier: (id) => request(`/api/suppliers/${id}`, { method: 'DELETE' })
 };

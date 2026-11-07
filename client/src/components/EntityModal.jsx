@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ImagePlus, LoaderCircle, Package, Tags, X } from 'lucide-react';
+import { ImagePlus, LoaderCircle, Package, Tags, Truck, X } from 'lucide-react';
+import { useForm } from '../hooks.js';
 
 const blankProduct = {
   name: '',
@@ -12,14 +13,16 @@ const blankProduct = {
 };
 
 const blankCategory = { name: '', description: '' };
+const blankSupplier = { name: '', contact: '', email: '', phone: '', address: '' };
 
 export default function EntityModal({ type, item, categories, onClose, onSave, saving }) {
   const isProduct = type === 'product';
-  const [form, setForm] = useState(isProduct ? blankProduct : blankCategory);
+  const isSupplier = type === 'supplier';
+  const { values: form, setValues: setForm, update: updateField, reset } = useForm(isProduct ? blankProduct : isSupplier ? blankSupplier : blankCategory);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    setForm(item
+    reset(item
       ? isProduct
         ? {
             name: item.name,
@@ -30,12 +33,14 @@ export default function EntityModal({ type, item, categories, onClose, onSave, s
             description: item.description || '',
             image: item.image || ''
           }
-        : { name: item.name, description: item.description || '' }
+        : isSupplier
+          ? { name: item.name, contact: item.contact || '', email: item.email || '', phone: item.phone || '', address: item.address || '' }
+          : { name: item.name, description: item.description || '' }
       : isProduct
         ? { ...blankProduct, categoryId: categories[0] ? String(categories[0].id) : '' }
-        : blankCategory);
+        : isSupplier ? blankSupplier : blankCategory);
     setError('');
-  }, [item, isProduct, categories]);
+  }, [item, isProduct, isSupplier, categories, reset]);
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -44,10 +49,6 @@ export default function EntityModal({ type, item, categories, onClose, onSave, s
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [onClose, saving]);
-
-  const updateField = (event) => {
-    setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +65,7 @@ export default function EntityModal({ type, item, categories, onClose, onSave, s
     }
   };
 
-  const TitleIcon = isProduct ? Package : Tags;
+  const TitleIcon = isProduct ? Package : isSupplier ? Truck : Tags;
 
   return (
     <div className="modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget && !saving) onClose(); }}>
@@ -88,6 +89,14 @@ export default function EntityModal({ type, item, categories, onClose, onSave, s
                 <label className="form-field form-field-wide"><span>Imagen (URL)</span><div className="input-prefix input-image"><ImagePlus size={16} /><input type="url" name="image" value={form.image} onChange={updateField} placeholder="https://..." /></div></label>
               </div>
             </>
+          ) : isSupplier ? (
+            <div className="form-grid">
+              <label className="form-field form-field-wide"><span>Nombre del proveedor <b>*</b></span><input autoFocus required maxLength="80" name="name" value={form.name} onChange={updateField} placeholder="Ej. Casa Norte" /></label>
+              <label className="form-field"><span>Persona de contacto</span><input maxLength="80" name="contact" value={form.contact} onChange={updateField} placeholder="Nombre y apellido" /></label>
+              <label className="form-field"><span>Correo electrónico</span><input type="email" name="email" value={form.email} onChange={updateField} placeholder="correo@ejemplo.com" /></label>
+              <label className="form-field"><span>Teléfono</span><input maxLength="30" name="phone" value={form.phone} onChange={updateField} placeholder="+58 000-000-0000" /></label>
+              <label className="form-field"><span>Dirección</span><input maxLength="160" name="address" value={form.address} onChange={updateField} placeholder="Ciudad, país" /></label>
+            </div>
           ) : (
             <div className="form-grid">
               <label className="form-field form-field-wide"><span>Nombre de la categoría <b>*</b></span><input autoFocus required maxLength="60" name="name" value={form.name} onChange={updateField} placeholder="Ej. Decoración" /></label>
@@ -102,7 +111,7 @@ export default function EntityModal({ type, item, categories, onClose, onSave, s
             <button className="secondary-button" type="button" onClick={onClose} disabled={saving}>Cancelar</button>
             <button className="primary-button" type="submit" disabled={saving || (isProduct && categories.length === 0)}>
               {saving ? <LoaderCircle className="animate-spin" size={16} /> : <TitleIcon size={16} />}
-              {saving ? 'Guardando...' : item ? 'Guardar cambios' : `Crear ${isProduct ? 'producto' : 'categoría'}`}
+              {saving ? 'Guardando...' : item ? 'Guardar cambios' : `Crear ${isProduct ? 'producto' : isSupplier ? 'proveedor' : 'categoría'}`}
             </button>
           </div>
         </form>

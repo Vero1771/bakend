@@ -1,29 +1,66 @@
-# Luma Market Dashboard
+# Luma Market — Actividad 3.1
 
-Aplicación web para consultar y administrar el inventario de Luma Market.
-Permite gestionar productos y categorías, y guarda los cambios en una base de
-datos SQLite local.
+Aplicación web reactiva para administrar el catálogo y el inventario de Luma
+Market. Incluye una landing page, seis secciones, tres entidades con CRUD,
+Redux Toolkit, cinco hooks personalizados, backend propio en Express y
+persistencia en SQLite.
 
 ## Video de demostración
 
-[Ver el video de la Actividad 2 en YouTube](https://youtu.be/OevVay7fHow)
+- [Actividad 1.1](https://youtu.be/SyOJ8updclQ?si=mPbfGsknvLC5qCw2)
+- [Actividad 2](https://youtu.be/OevVay7fHow)
+- [Actividad 3.1](https://youtu.be/mqkcaSkZxto?si=3Pxb7nMT6crQn-pm)
 
 ## Tecnologías
 
-- React y Tailwind CSS para la interfaz.
-- Express para el backend y la API.
-- SQLite para guardar los datos.
+- React 19, Vite y Tailwind CSS para la interfaz.
+- Redux Toolkit y React Redux para el estado global.
+- Cinco hooks propios: `useDebounce`, `useLocalStorage`, `useMediaQuery`,
+  `useFetch` y `useForm`.
+- Express y `better-sqlite3` para el backend y la API REST.
+- Recharts para los gráficos del panel.
 - Node.js 22.12 o posterior.
 
-## Ejecutar
+## Secciones y entidades
+
+La aplicación navega sin React Router por estas seis secciones:
+
+- Inicio, con la landing page.
+- Panel general.
+- Productos.
+- Categorías.
+- Proveedores.
+- Reportes.
+
+Productos, categorías y proveedores incluyen formularios, tablas y operaciones
+crear, consultar, actualizar y eliminar. Los cambios se guardan en la base de
+datos SQLite local.
+
+## Ejecutar en desarrollo
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abre `http://localhost:5173` en el navegador. Para iniciar la versión de
-producción local, ejecuta `npm start` y abre `http://localhost:3000`.
+Abre `http://localhost:5173` en el navegador. Vite ejecuta React y redirige las
+solicitudes `/api` al backend Express en el puerto 3000.
 
-Las pruebas se ejecutan con `npm test`. La base de datos se crea
-automáticamente en `data/luma-market.sqlite` y permanece en la computadora.
+## Ejecutar en producción local
+
+```bash
+npm install
+npm start
+```
+
+Abre `http://localhost:3000`. La base de datos se crea automáticamente en
+`data/luma-market.sqlite`; no es necesario instalar SQLite por separado.
+
+## Verificar
+
+```bash
+npm test
+npm run build
+```
+
+El video utiliza las etiquetas `#univalledelmomboy` y `#tareaUVM`.

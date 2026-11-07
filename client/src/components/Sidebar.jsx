@@ -4,14 +4,20 @@ import {
   LayoutDashboard,
   Package,
   PanelLeftClose,
+  FileText,
+  Sparkles,
   Tags,
+  Truck,
   X
 } from 'lucide-react';
 
 const navigation = [
+  { id: 'landing', label: 'Inicio', icon: Sparkles },
   { id: 'dashboard', label: 'Panel general', icon: LayoutDashboard },
   { id: 'products', label: 'Productos', icon: Package },
-  { id: 'categories', label: 'Categorías', icon: Tags }
+  { id: 'categories', label: 'Categorías', icon: Tags },
+  { id: 'suppliers', label: 'Proveedores', icon: Truck },
+  { id: 'reports', label: 'Reportes', icon: FileText }
 ];
 
 export default function Sidebar({ activePage, onNavigate, open, onClose }) {
